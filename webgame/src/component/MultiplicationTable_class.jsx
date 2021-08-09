@@ -21,24 +21,30 @@ class MultiplicationTable extends Component {
         first: Math.floor(Math.random() * 9),
         second: Math.floor(Math.random() * 9),
       })
-      e.target.children[1].focus();
+      this.input.focus();
+      //e.target.children[1].focus();
     } else {
       //console.log(typeof(parseInt(this.state.value))) // number
       this.setState({
         result: '오답입니다! 다시 풀어보세요.',
         value: '',
       })
-      e.target.children[1].focus();
+      this.input.focus();
+      //e.target.children[1].focus();
     }
   }
-
-  render() {
+  
+  input;
+  ref = (c) => 
+    this.input = c;
+  
+    render() {
     return (
       <>
        <div>MultiplicationTable</div> 
        <form onSubmit={this.onSubmit}>
          <h1>{this.state.first} X {this.state.second} = ? </h1>
-         <input type="number" onChange={this.onChange} value={this.state.value}/>
+         <input ref={this.ref} type="number" onChange={this.onChange} value={this.state.value}/>
          <button>입력</button>
        </form>
        <div>결과: {this.state.result}</div>
