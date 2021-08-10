@@ -1,0 +1,68 @@
+<!-- 스스로 js로 제작 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>구구단</title>
+    <style>
+      #title{
+        background-color: aquamarine; 
+        width: 350px; 
+        height:60px; 
+        line-height:60px; 
+        text-align:center;
+      }
+      #section{
+        border:1px solid black;
+        width: 350px; 
+        text-align:center;
+      }
+    </style>
+</head>
+<body>
+  <h3 id="title">MultiplicationTable</h3>
+  <div id="section">
+    <h1 id="question"></h1>
+    <input type="text" id="answer">
+    <button id="submit">입력</button>
+    <p id="result">결과</p>
+  </div>
+
+  <script>
+    const question = document.querySelector('#question');
+    const answer = document.querySelector('#answer');
+    const submit = document.querySelector('#submit');
+    let num1;
+    let num2;
+
+    function randomNumber() {
+      num1 = Math.floor(Math.random() * (10 - 1) + 1 ); // 1~9 랜덤
+      num2 = Math.floor(Math.random() * (10 - 1) + 1 );
+    }
+
+    function executeAnswer() {
+      console.log(num1*num2);
+      console.log(answer.value);
+      if (answer.value == num1 * num2) {
+        result.textContent = '정답입니다!';
+        startGame();
+        answer.value = null;
+      } else {
+        result.textContent = `오답입니다! 정답은 ${num1 * num2}였습니다...`;
+        startGame();
+        answer.value = null;
+      }
+    } 
+
+    function startGame() {
+      randomNumber();
+      question.textContent = `${num1} X ${num2} = ?`;
+      submit.addEventListener('click', executeAnswer);
+    }
+
+    startGame();
+  </script>
+</body>
+</html>
