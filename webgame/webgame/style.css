@@ -1,0 +1,25 @@
+.ball {
+  display: inline-block;
+  border: 1px solid black;
+  border-radius: 20px;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 20px;
+  text-align: center;
+  margin-right: 20px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 120px;
+  height: 120px;
+}
+
+tr,
+td {
+  border: 1px solid black;
+  text-align: center;
+  width: 40px;
+  height: 40px;
+}
