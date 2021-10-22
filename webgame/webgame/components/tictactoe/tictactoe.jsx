@@ -29,9 +29,12 @@ const reducer = (state, action) => { //action이 dispatch될때마다 reducer가
       };
       //새로운 winner를 반환한다
     case CLICK_CELL:
+      //기존 테이블 데이터를 얕은 복사하고(spread 연산자를 이용해서)
+      //객체가 있으면 복사를 해서 불변성을 지켜줘야한다고 생각하기
       const tableData = [...state.tableData];
-      tableData[action.row] = [...tableData[action.row]]; //객체가 있으면 복사를 해서 불변성을 지켜줘야함
+      tableData[action.row] = [...tableData[action.row]]; 
       //immer라는 라이브러리를 사용해서 가독성을 해결함
+      // 칸에다가 현재 턴인 O나 X가 들어갈 수 있도록
       tableData[action.row][action.cell] = state.turn;
       return{
         ...state,
@@ -53,10 +56,13 @@ const Tictactoe = () => {
   // const [turn, setTurn] = useState('O');
   // const [tableData, setTableData] = useState('');
 
-  const onClickTable = useCallback(() => { // 컴포넌트에 넣는 함수들, 이벤트들은 useCallback을 사용
-    dispatch({ type: SET_WINNER, winner: 'O' }); //dispatch안에 들어가는 action객체를 만들어줘야 함 (redux에서 따온 개념)
+  const onClickTable = useCallback(() => { 
+    // 컴포넌트에 넣는 함수들, 이벤트들은 useCallback을 사용
+    dispatch({ type: SET_WINNER, winner: 'O' }); 
+    //dispatch안에 들어가는 action객체를 만들어줘야 함 (redux에서 따온 개념)
   }, []);
 
+  // 비동기적인 dispatch의 state를 변경하기 위한 useEffect
   useEffect(() => {
     const [row, cell] = recentCell;
     if (row < 0) {
@@ -95,6 +101,7 @@ const Tictactoe = () => {
         dispatch({ type: CHANGE_TURN });
       }
     }
+    //recentCell이 변경되면 useEffect가 실행된다
   }, [recentCell]);
 
     return (
